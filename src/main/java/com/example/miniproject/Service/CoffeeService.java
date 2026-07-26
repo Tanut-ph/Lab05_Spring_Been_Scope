@@ -1,4 +1,5 @@
 package com.example.miniproject.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,8 @@ import com.example.miniproject.Model.Coffee;
 
 @Service
 public class CoffeeService {
-private final List<Coffee> coffees = new ArrayList<>();
+    private final List<Coffee> coffees = new ArrayList<>();
 
-    
     public CoffeeService() {
         coffees.add(new Coffee(1, "Espresso", 45.5));
         coffees.add(new Coffee(2, "Latte", 55.0));
@@ -30,9 +30,18 @@ private final List<Coffee> coffees = new ArrayList<>();
         return null;
     }
 
-    // เพิ่มข้อมูล
-    public void addCoffee(Coffee coffee) {
+    // เพิ่มข้อมูล (สร้าง ID อัตโนมัติต่อจากอันล่าสุด)
+    public Coffee addCoffee(Coffee coffee) {
+        int maxId = 0;
+        for (Coffee c : coffees) {
+            if (c.getId() > maxId) {
+                maxId = c.getId();
+            }
+        }
+        
+        coffee.setId(maxId + 1); // กำหนด ID ใหม่
         coffees.add(coffee);
+        return coffee; // คืนค่า Object ที่เพิ่งสร้าง
     }
 
     // ลบข้อมูล
@@ -41,13 +50,14 @@ private final List<Coffee> coffees = new ArrayList<>();
     }
 
     // แก้ไขข้อมูล
-    public boolean updateCoffee(int id, Coffee newCoffee) {
+    public Coffee updateCoffee(int id, Coffee newCoffee) {
         for (int i = 0; i < coffees.size(); i++) {
             if (coffees.get(i).getId() == id) {
-                coffees.set(i, newCoffee);
-                return true;
+                newCoffee.setId(id); // กำหนด ID ให้ตรงกับ ID ที่ต้องการแก้ไข
+                coffees.set(i, newCoffee); // อัปเดตข้อมูลใน List
+                return newCoffee; // คืนค่าข้อมูลใหม่กลับไป
             }
         }
-        return false;
+        return null; // คืนค่า null ถ้าไม่พบ ID ที่ต้องการแก้
     }
 }
