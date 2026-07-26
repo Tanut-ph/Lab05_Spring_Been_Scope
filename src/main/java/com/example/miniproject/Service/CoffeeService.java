@@ -2,11 +2,15 @@ package com.example.miniproject.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.miniproject.Model.Coffee;
 
+@Service
 public class CoffeeService {
 private final List<Coffee> coffees = new ArrayList<>();
 
+    
     public CoffeeService() {
         coffees.add(new Coffee(1, "Espresso", 50));
         coffees.add(new Coffee(2, "Latte", 65));
