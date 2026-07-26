@@ -3,6 +3,7 @@ package com.example.miniproject.Controller;
 import com.example.miniproject.Model.Coffee;
 import com.example.miniproject.Service.CoffeeService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -16,5 +17,9 @@ public class CoffeeController {
     @GetMapping("/coffees")
     public List<Coffee> getAllCoffees() {
         return coffeeService.getAll();
+    }
+    @GetMapping("/coffees/{id}")
+    public Coffee getCoffeeById(@PathVariable int id) {
+        return coffeeService.getById(id);
     }
 }
