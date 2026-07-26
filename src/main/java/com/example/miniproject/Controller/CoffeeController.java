@@ -1,15 +1,18 @@
 package com.example.miniproject.Controller;
 
-import com.example.miniproject.Model.Coffee;
-import com.example.miniproject.Service.CoffeeService;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.miniproject.Model.Coffee;
+import com.example.miniproject.Service.CoffeeService;
 
 @RestController
 public class CoffeeController {
@@ -39,5 +42,9 @@ public class CoffeeController {
     @DeleteMapping("/coffees/{id}")
     public boolean deleteCoffee(@PathVariable int id) {
         return coffeeService.deleteCoffee(id);
+    }
+    @GetMapping("/coffees/search")
+    public List<Coffee> searchCoffeesByName(@RequestParam("name") String name) {
+        return coffeeService.searchByName(name);
     }
 }

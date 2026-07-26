@@ -33,15 +33,17 @@ public class CoffeeService {
     // เพิ่มข้อมูล (สร้าง ID อัตโนมัติต่อจากอันล่าสุด)
     public Coffee addCoffee(Coffee coffee) {
         int maxId = 0;
+        // วนลูปหาว่าตอนนี้ ID สูงสุดคือเลขอะไร
         for (Coffee c : coffees) {
             if (c.getId() > maxId) {
                 maxId = c.getId();
             }
         }
         
-        coffee.setId(maxId + 1); // กำหนด ID ใหม่
+        // เอา ID สูงสุดมาบวก 1 แล้วจับยัดใส่ข้อมูลใหม่
+        coffee.setId(maxId + 1); 
         coffees.add(coffee);
-        return coffee; // คืนค่า Object ที่เพิ่งสร้าง
+        return coffee; 
     }
 
     // ลบข้อมูล
@@ -59,5 +61,15 @@ public class CoffeeService {
             }
         }
         return null; // คืนค่า null ถ้าไม่พบ ID ที่ต้องการแก้
+    }
+    public List<Coffee> searchByName(String name) {
+        List<Coffee> result = new ArrayList<>();
+        for (Coffee coffee : coffees) {
+            // แปลงเป็นตัวพิมพ์เล็กทั้งคู่ก่อนเทียบ เพื่อให้ค้นหาได้ง่ายขึ้น
+            if (coffee.getName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(coffee);
+            }
+        }
+        return result;
     }
 }
