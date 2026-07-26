@@ -12,8 +12,8 @@ private final List<Coffee> coffees = new ArrayList<>();
 
     
     public CoffeeService() {
-        coffees.add(new Coffee(1, "Espresso", 50));
-        coffees.add(new Coffee(2, "Latte", 65));
+        coffees.add(new Coffee(1, "Espresso", 45.5));
+        coffees.add(new Coffee(2, "Latte", 55.0));
     }
 
     public List<Coffee> getAll() {
